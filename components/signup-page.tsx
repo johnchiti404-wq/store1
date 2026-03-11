@@ -186,11 +186,11 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
   return (
     <div className="relative min-h-dvh w-full overflow-hidden">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: step === 1 
-            ? "url('/images/alestore.png')" 
+          backgroundImage: step === 1
+            ? "url('/images/alestore.png')"
             : "url('/images/store.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -208,7 +208,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
       {/* Content Container */}
       <div className="relative z-10 min-h-dvh flex items-center justify-center p-4">
         {/* Glass Card - subtle blur to show water droplets */}
-        <div 
+        <div
           className="w-full max-w-sm rounded-3xl p-6 shadow-2xl"
           style={{
             background: "rgba(255, 255, 255, 0.15)",
@@ -223,7 +223,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
               {/* Header */}
               <div className="text-center space-y-1">
                 <h1 className="text-3xl font-bold text-white drop-shadow-lg">Welcome</h1>
-                <p className="text-white/80 text-sm">Sign in to continue</p>
+                <p className="text-white/80 text-sm">Sign up to continue</p>
               </div>
 
               {/* Error Message */}
@@ -234,7 +234,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
               )}
 
               {/* Phone Field */}
-              <div 
+              <div
                 className="flex items-center gap-3 rounded-xl px-4 py-3"
                 style={{
                   background: "rgba(255, 255, 255, 0.2)",
@@ -256,7 +256,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
               </div>
 
               {/* Email Field */}
-              <div 
+              <div
                 className="flex items-center gap-3 rounded-xl px-4 py-3"
                 style={{
                   background: "rgba(255, 255, 255, 0.2)",
@@ -274,7 +274,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
               </div>
 
               {/* Password Field */}
-              <div 
+              <div
                 className="flex items-center gap-3 rounded-xl px-4 py-3"
                 style={{
                   background: "rgba(255, 255, 255, 0.2)",
@@ -292,7 +292,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
               </div>
 
               {/* Confirm Password Field */}
-              <div 
+              <div
                 className="flex items-center gap-3 rounded-xl px-4 py-3"
                 style={{
                   background: "rgba(255, 255, 255, 0.2)",
@@ -315,7 +315,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
                 disabled={!isStep1Valid}
                 className="w-full py-3.5 rounded-xl font-semibold text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
-                  background: isStep1Valid 
+                  background: isStep1Valid
                     ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
                     : "rgba(255, 255, 255, 0.2)",
                 }}
@@ -340,7 +340,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
               )}
 
               {/* First Name Field */}
-              <div 
+              <div
                 className="rounded-xl px-4 py-2"
                 style={{
                   background: "rgba(255, 255, 255, 0.2)",
@@ -358,7 +358,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
               </div>
 
               {/* Surname Field */}
-              <div 
+              <div
                 className="rounded-xl px-4 py-2"
                 style={{
                   background: "rgba(255, 255, 255, 0.2)",
@@ -376,7 +376,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
               </div>
 
               {/* Store Name Field */}
-              <div 
+              <div
                 className="rounded-xl px-4 py-2"
                 style={{
                   background: "rgba(255, 255, 255, 0.2)",
@@ -395,7 +395,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
 
               {/* Store Address Field with Autocomplete */}
               <div className="relative">
-                <div 
+                <div
                   className="flex items-center gap-3 rounded-xl px-4 py-2"
                   style={{
                     background: "rgba(255, 255, 255, 0.2)",
@@ -419,7 +419,7 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
 
                 {/* Address Suggestions Dropdown */}
                 {showAddressSuggestions && addressSuggestions.length > 0 && (
-                  <div 
+                  <div
                     className="absolute top-full left-0 right-0 mt-1 rounded-xl overflow-hidden z-20 max-h-40 overflow-y-auto"
                     style={{
                       background: "rgba(255, 255, 255, 0.95)",
