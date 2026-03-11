@@ -26,7 +26,7 @@ export function DashboardPage({ data, onToggleStatus, onNavigate }: DashboardPag
               backgroundImage: `url(${logoUrl})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              filter: "blur(40px)",
+              filter: "blur(30px)",
               opacity: 0.15,
               transform: "scale(1.2)",
             }}
@@ -43,17 +43,15 @@ export function DashboardPage({ data, onToggleStatus, onNavigate }: DashboardPag
               <button
                 id="storeStatusToggle"
                 onClick={onToggleStatus}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 ${
-                  data.storeStatus ? "bg-primary" : "bg-muted-foreground/30"
-                }`}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 ${data.storeStatus ? "bg-primary" : "bg-muted-foreground/30"
+                  }`}
                 role="switch"
                 aria-checked={data.storeStatus}
                 aria-label="Toggle store status"
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform duration-300 ${
-                    data.storeStatus ? "translate-x-6" : "translate-x-1"
-                  }`}
+                  className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform duration-300 ${data.storeStatus ? "translate-x-6" : "translate-x-1"
+                    }`}
                 />
               </button>
               <span className={`text-sm font-medium flex items-center gap-1 ${data.storeStatus ? "text-[#22c55e]" : "text-destructive"}`}>
