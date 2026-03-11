@@ -17,9 +17,10 @@ interface SignupPageProps {
     email: string
     address: string
   }) => void
+  onSignIn: () => void
 }
 
-export function SignupPage({ onSignupSuccess }: SignupPageProps) {
+export function SignupPage({ onSignupSuccess, onSignIn }: SignupPageProps) {
   const [step, setStep] = useState<1 | 2>(1)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -211,9 +212,9 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
         <div
           className="w-full max-w-sm rounded-3xl p-6 shadow-2xl"
           style={{
-            background: "rgba(255, 255, 255, 0.15)",
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
+            background: "rgba(255, 255, 255, 0.14)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
             border: "1px solid rgba(255, 255, 255, 0.25)",
           }}
         >
@@ -322,6 +323,17 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
               >
                 Continue
               </button>
+
+              {/* Sign In Link */}
+              <div className="text-center pt-2">
+                <span className="text-white/60 text-sm">Already have an account? </span>
+                <button 
+                  onClick={onSignIn}
+                  className="text-white font-semibold text-sm hover:underline"
+                >
+                  Sign In
+                </button>
+              </div>
             </div>
           ) : (
             /* Step 2 - Store Information */

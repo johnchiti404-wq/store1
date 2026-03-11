@@ -12,7 +12,7 @@ export function WelcomePage({ onSignIn, onSignUp }: WelcomePageProps) {
       <div 
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/welcome-ivMIefLmRrDKQJXfBmaw7HTdD2ssIe.jpg')",
+          backgroundImage: "url('/images/bike.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -24,9 +24,9 @@ export function WelcomePage({ onSignIn, onSignUp }: WelcomePageProps) {
         <div 
           className="w-full max-w-sm rounded-3xl p-8 shadow-2xl"
           style={{
-            background: "rgba(255, 255, 255, 0.15)",
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
+            background: "rgba(255, 255, 255, 0.14)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
             border: "1px solid rgba(255, 255, 255, 0.25)",
           }}
         >

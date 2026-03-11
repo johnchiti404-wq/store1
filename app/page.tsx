@@ -305,7 +305,12 @@ export default function MerchantApp() {
     }
     
     if (authPage === "signup") {
-      return <SignupPage onSignupSuccess={handleSignupSuccess} />
+      return (
+        <SignupPage 
+          onSignupSuccess={handleSignupSuccess}
+          onSignIn={() => setAuthPage("login")}
+        />
+      )
     }
   }
 

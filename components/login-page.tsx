@@ -57,7 +57,7 @@ export function LoginPage({ onLoginSuccess, onSignUp }: LoginPageProps) {
       <div 
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/welcome-ivMIefLmRrDKQJXfBmaw7HTdD2ssIe.jpg')",
+          backgroundImage: "url('/images/shop.png')",
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
         }}
@@ -72,10 +72,10 @@ export function LoginPage({ onLoginSuccess, onSignUp }: LoginPageProps) {
         <div 
           className="w-full max-w-sm rounded-3xl p-6 shadow-2xl"
           style={{
-            background: "rgba(30, 41, 59, 0.7)",
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
-            border: "1px solid rgba(255, 255, 255, 0.15)",
+            background: "rgba(255, 255, 255, 0.14)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
+            border: "1px solid rgba(255, 255, 255, 0.25)",
           }}
         >
           <div className="space-y-5">
