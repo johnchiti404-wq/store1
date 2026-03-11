@@ -27,7 +27,7 @@ export function DashboardPage({ data, onToggleStatus, onNavigate }: DashboardPag
               backgroundSize: "cover",
               backgroundPosition: "center",
               filter: "blur(40px)",
-              opacity: 0.15,
+              opacity: 0.1,
               transform: "scale(1.2)",
             }}
           />
