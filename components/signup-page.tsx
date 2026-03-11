@@ -207,14 +207,14 @@ export function SignupPage({ onSignupSuccess }: SignupPageProps) {
 
       {/* Content Container */}
       <div className="relative z-10 min-h-dvh flex items-center justify-center p-4">
-        {/* Glass Card */}
+        {/* Glass Card - subtle blur to show water droplets */}
         <div 
           className="w-full max-w-sm rounded-3xl p-6 shadow-2xl"
           style={{
             background: "rgba(255, 255, 255, 0.15)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(255, 255, 255, 0.3)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            border: "1px solid rgba(255, 255, 255, 0.25)",
           }}
         >
           {step === 1 ? (

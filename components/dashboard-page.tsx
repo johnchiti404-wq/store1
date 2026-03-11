@@ -18,7 +18,7 @@ export function DashboardPage({ data, onToggleStatus, onNavigate }: DashboardPag
     <div className="flex flex-col h-full">
       {/* Fixed Header */}
       <div className="bg-card px-4 pt-5 pb-4 shrink-0 relative overflow-hidden">
-        {/* Blurred Logo Background */}
+        {/* Blurred Logo Background - reduced blur for subtle glass effect */}
         {logoUrl && (
           <div
             className="absolute inset-0 z-0"
@@ -26,9 +26,9 @@ export function DashboardPage({ data, onToggleStatus, onNavigate }: DashboardPag
               backgroundImage: `url(${logoUrl})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              filter: "blur(40px)",
-              opacity: 0.15,
-              transform: "scale(1.2)",
+              filter: "blur(12px)",
+              opacity: 0.12,
+              transform: "scale(1.1)",
             }}
           />
         )}

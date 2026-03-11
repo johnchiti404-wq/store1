@@ -1,8 +1,11 @@
 "use client"
 
 import { useState, useCallback, useEffect } from "react"
-import { onAuthStateChanged, signOut } from "firebase/auth"
-import { auth } from "@/lib/firebase"
+import { onAuthStateChanged, signOut, type User } from "firebase/auth"
+import { doc, getDoc } from "firebase/firestore"
+import { auth, db } from "@/lib/firebase"
+import { WelcomePage } from "@/components/welcome-page"
+import { LoginPage } from "@/components/login-page"
 import { SignupPage } from "@/components/signup-page"
 import { DashboardPage } from "@/components/dashboard-page"
 import { OrdersPage } from "@/components/orders-page"
@@ -16,9 +19,12 @@ import { BottomNavigation } from "@/components/bottom-navigation"
 import { placeholderStoreData } from "@/lib/store-data"
 import type { StoreData, Product, OpeningHour, StoreInfo } from "@/lib/store-data"
 
+type AuthPage = "welcome" | "login" | "signup"
+
 export default function MerchantApp() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [authPage, setAuthPage] = useState<AuthPage>("welcome")
   const [activePage, setActivePage] = useState("dashboard")
   const [storeData, setStoreData] = useState<StoreData>(placeholderStoreData)
   const [direction, setDirection] = useState<"left" | "right">("right")
@@ -26,15 +32,52 @@ export default function MerchantApp() {
 
   const pageOrder = ["dashboard", "orders", "notifications", "settings"]
 
-  // Check authentication state on mount
+  // Fetch store data from Firestore
+  const fetchStoreData = useCallback(async (uid: string) => {
+    try {
+      const storeDoc = await getDoc(doc(db, "stores", uid))
+      if (storeDoc.exists()) {
+        const data = storeDoc.data()
+        setStoreData((prev) => ({
+          ...prev,
+          storeName: data.storeName || prev.storeName,
+          storeInfo: {
+            ...prev.storeInfo,
+            name: data.storeName || prev.storeInfo.name,
+            address: data.address || prev.storeInfo.address,
+            phone: data.phone || prev.storeInfo.phone,
+            logo: data.logo || prev.storeInfo.logo,
+          },
+          // Load any other stored fields
+          openingHours: data.openingHours?.length > 0 ? data.openingHours : prev.openingHours,
+          products: data.products?.length > 0 ? data.products : prev.products,
+        }))
+      }
+    } catch (error) {
+      console.error("Error fetching store data:", error)
+    }
+  }, [])
+
+  // Check authentication state on mount and handle persistence
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsAuthenticated(!!user)
+    const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
+      if (user) {
+        // User is logged in - fetch their store data from Firestore
+        await fetchStoreData(user.uid)
+        setIsAuthenticated(true)
+        setAuthPage("welcome")
+      } else {
+        // User is not logged in
+        setIsAuthenticated(false)
+        setAuthPage("welcome")
+        // Reset store data to placeholder
+        setStoreData(placeholderStoreData)
+      }
       setIsLoading(false)
     })
 
     return () => unsubscribe()
-  }, [])
+  }, [fetchStoreData])
 
   // Handle successful signup
   const handleSignupSuccess = useCallback((userData: {
@@ -57,6 +100,12 @@ export default function MerchantApp() {
         phone: userData.phone,
       },
     }))
+    setIsAuthenticated(true)
+  }, [])
+
+  // Handle successful login
+  const handleLoginSuccess = useCallback(() => {
+    // Auth state change listener will handle fetching data
     setIsAuthenticated(true)
   }, [])
 
@@ -126,7 +175,9 @@ export default function MerchantApp() {
     try {
       await signOut(auth)
       setIsAuthenticated(false)
+      setAuthPage("welcome")
       setActivePage("dashboard")
+      setStoreData(placeholderStoreData)
     } catch (error) {
       console.error("Logout error:", error)
     }
@@ -233,9 +284,29 @@ export default function MerchantApp() {
     )
   }
 
-  // Show signup page if not authenticated
+  // Show authentication flow if not authenticated
   if (!isAuthenticated) {
-    return <SignupPage onSignupSuccess={handleSignupSuccess} />
+    if (authPage === "welcome") {
+      return (
+        <WelcomePage 
+          onSignIn={() => setAuthPage("login")} 
+          onSignUp={() => setAuthPage("signup")} 
+        />
+      )
+    }
+    
+    if (authPage === "login") {
+      return (
+        <LoginPage 
+          onLoginSuccess={handleLoginSuccess}
+          onSignUp={() => setAuthPage("signup")}
+        />
+      )
+    }
+    
+    if (authPage === "signup") {
+      return <SignupPage onSignupSuccess={handleSignupSuccess} />
+    }
   }
 
   // Show main dashboard app
